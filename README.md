@@ -21,6 +21,8 @@ Express + Mongoose project practicing basic MongoDB queries on a `students` coll
    ```
 3. Make sure MongoDB is running locally, or use an Atlas connection string in `MONGO_URI`.
 
+If the default local MongoDB server is not available, the app falls back to an in-memory MongoDB instance so the exercises can still run in a fresh environment.
+
 ## Run the queries script
 
 ```bash

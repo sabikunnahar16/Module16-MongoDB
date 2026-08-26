@@ -6,10 +6,6 @@ const Student = require('./models/Student');
 const app = express();
 app.use(express.json());
 
-connectDB().catch((err) => {
-  console.error('Failed to connect to MongoDB:', err.message);
-});
-
 // Task 2.1 - Show all students
 app.get('/students', async (req, res) => {
   const students = await Student.find({});
@@ -53,4 +49,15 @@ app.get('/departments', async (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+
+async function startServer() {
+  try {
+    await connectDB();
+    app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+  } catch (err) {
+    console.error('Failed to connect to MongoDB:', err.message);
+    process.exit(1);
+  }
+}
+
+startServer();
